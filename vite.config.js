@@ -6,4 +6,9 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     react()],
+    base: '/food-order-app', 
+  build: {
+    outDir: 'dist',
+  },
+
 })

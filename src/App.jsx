@@ -9,7 +9,7 @@ function AppContent() {
   const [isCartOpen, setIsCartOpen] = useState(false)
 
   return (
-    <div className='min=h=screen flex flex-col'>
+    <div className='min-h-screen flex flex-col'>
       <Header setIsCartOpen={setIsCartOpen} />
       <main className='flex-grow p-4'>
         <div className='max-w-7xl mx-auto'>
