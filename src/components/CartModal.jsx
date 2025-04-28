@@ -40,7 +40,17 @@ function CartModal({ onClose }) {
       <div className="fixed inset-0 backdrop-blur-sm z-40" onClick={onClose} />
       <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
         <div className="bg-white p-6 rounded shadow-lg max-w-lg w-full">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Cart</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold text-gray-800">Your Cart</h2>
+            {cart.length > 0 && (
+              <button
+                onClick={clearCart}
+                className="text-red-500 hover:text-red-600 text-sm"
+              >
+                Clear Cart
+              </button>
+            )}
+          </div>
           {cart.length === 0 ? (
             <p className="text-gray-600">Cart is empty</p>
           ) : (
@@ -51,24 +61,26 @@ function CartModal({ onClose }) {
                     <span className="text-gray-800">
                       {item.name}
                     </span>
-                    <div className="flex items-center">
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="bg-gray-200 text-gray-700 px-2 py-1 rounded-l hover:bg-gray-300"
-                        disabled={item.quantity <= 1}
-                      >
-                        -
-                      </button>
-                      <span className="bg-gray-100 px-3 py-1">
-                        {item.quantity}
-                      </span>
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="bg-gray-200 text-gray-700 px-2 py-1 rounded-r hover:bg-gray-300"
-                      >
-                        +
-                      </button>
-                      <span className="text-green-600 ml-4 mr-4">
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center border rounded">
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="bg-gray-200 text-gray-700 px-2 py-1 hover:bg-gray-300"
+                          // disabled={item.quantity <= 1}
+                        >
+                          -
+                        </button>
+                        <span className="bg-gray-100 px-3 py-1 min-w-[2.5rem] text-center">
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          className="bg-gray-200 text-gray-700 px-2 py-1 hover:bg-gray-300"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <span className="text-green-600 min-w-[5rem] text-right">
                         ${(item.price * item.quantity).toFixed(2)}
                       </span>
                       <button
