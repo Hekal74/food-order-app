@@ -7,6 +7,7 @@ export default defineConfig({
     tailwindcss(),
     react()],
     base: '/food-order-app', 
+    publicDir: 'public', 
   build: {
     outDir: 'dist',
   },
