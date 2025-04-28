@@ -28,6 +28,19 @@ export function CartProvider({ children }) {
     });
   };
 
+  const updateQuantity = (id, newQuantity) => {
+    if (newQuantity < 1) return;
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const getTotal = () => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
   };
@@ -37,7 +50,7 @@ export function CartProvider({ children }) {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, getTotal, getCartItemCount }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, getTotal, getCartItemCount, clearCart, updateQuantity }}>
       {children}
     </CartContext.Provider>
   );
